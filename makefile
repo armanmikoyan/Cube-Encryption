@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -Iincludes -std=c++20
+CFLAGS = -Iincludes -std=c++20
 SOURCES = $(wildcard src/*.cpp)
 TARGET = prog
 
