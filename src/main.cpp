@@ -4,10 +4,9 @@
 #include "encryption.h"
 
 int main() {
-    Cube cube("arman");
     Encryption enc;
-    std::string s = "armanmik oyanaaaaa ";
+    std::string s = "qwerty";
     std::cout << enc.encrypt(s) << std::endl;
-    std::cout << enc.get_key() << std::endl;
+    std::cout << enc.decrypt(enc.get_key());
       
 }

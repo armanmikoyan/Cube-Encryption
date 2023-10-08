@@ -15,7 +15,7 @@ public:
 
 public:     
     std::string& encrypt(std::string&);
-    std::string& decrypt(std::string&);
+    std::string decrypt(std::string);
     std::string get_key() const;
 
 private:
@@ -30,7 +30,9 @@ private:
 public:
 //    std::string _key;
    std::vector<Cube*> _cubes;
+   std::vector<int> _randoms;
    std::string _hash;
+   std::string _unhash;
    std::string _key;
 };
 
