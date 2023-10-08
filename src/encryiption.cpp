@@ -79,7 +79,6 @@ std::string& Encryption::encrypt(std::string& text)
         random_num = random_number();
 
         _hash += _cubes[i]->get_cube();
-        std::cout << _key << " " << _key.size() << std::endl;
     }
     return _hash;
 }
@@ -116,9 +115,16 @@ std::string Encryption::decrypt(std::string key)
             }
             --current;  
         }
-            _unhash += _cubes[i]->get_cube();
-            current = difference * k - 1;   
-            k++;
+        _unhash += _cubes[i]->get_cube();
+        current = difference * k - 1;   
+        k++;
+
+        size_t found = _unhash.find('$');
+        while (found != std::string::npos) 
+        {
+            _unhash.erase(found, 1);
+            found = _unhash.find('$', found);
+        }
     }
     return _unhash;
 }

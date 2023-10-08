@@ -5,8 +5,7 @@
 
 int main() {
     Encryption enc;
-    std::string s = "armannnn1qweasdasdadsssqwe";
+    std::string s = "hello arman mikoyan @ mail . com";
     std::cout << enc.encrypt(s) << std::endl;
-    std::cout << enc.decrypt(enc.get_key());
-      
+    std::cout << enc.decrypt(enc.get_key()) << "\n";   
 }
