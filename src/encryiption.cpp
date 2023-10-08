@@ -74,7 +74,7 @@ std::string& Encryption::encrypt(std::string& text)
         _key += static_cast<char>(random_num) + '0';
         _key += ':';
         random_num = random_number();
-        
+
         rotate_down(*(_cubes[i]), random_num);
         _key += 'D';
         _key += static_cast<char>(random_num) + '0';
