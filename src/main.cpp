@@ -6,5 +6,7 @@
 int main() {
     Cube cube("arman");
     Encryption enc;
-    std::cout << cube.get_cube() << "\n";
+    std::string s = "armanmikoyan";
+    std::cout << enc.encrypt(s) << std::endl;
+      
 }

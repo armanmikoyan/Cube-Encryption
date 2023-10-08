@@ -1,6 +1,6 @@
 #include "cube.h"
 
-Cube::Cube(const std::string& cube)
+Cube::Cube(std::string&& cube)
 {
     _cube = cube;
     if (_cube.size() < 8) {

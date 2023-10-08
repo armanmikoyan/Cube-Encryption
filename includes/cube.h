@@ -6,7 +6,7 @@
 
 class Cube {
 public:
-    Cube(const std::string&);
+    Cube(std::string&&);
     char& operator[](size_t);
 
 public:

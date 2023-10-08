@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 
+#include <random>
 
 class Encryption {
 public:
@@ -13,7 +14,7 @@ public:
    ~Encryption(); 
 
 public:     
-    void encrypt(std::string, size_t, size_t, size_t, size_t);
+    std::string& encrypt(std::string&);
     void decrypt();
 
 private:
@@ -21,10 +22,14 @@ private:
     void  rotate_left(Cube&, size_t);
     void    rotate_up(Cube&, size_t);
     void  rotate_down(Cube&, size_t);
+    void  create_cubes(std::string&);
+    static int       random_number();
+    std::string get_hash() const;
 
 public:
 //    std::string _key;
    std::vector<Cube*> _cubes;
+   std::string _hash;
 };
 
 

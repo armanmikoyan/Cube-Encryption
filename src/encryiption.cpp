@@ -9,6 +9,66 @@ Encryption::~Encryption()
     }
 }
 
+int Encryption::random_number()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> distribution(1, 3);
+
+    return distribution(gen);
+}
+
+ std::string Encryption::get_hash() const
+ {
+    return _hash;
+ }
+
+void Encryption::create_cubes(std::string& text)
+{
+    if (text.size() < 8 && text.size() > 0)
+        {
+            _cubes.push_back(new Cube{std::move(text)});
+        }
+        else 
+        {
+            int count = 0;
+            std::string tmp;
+            for (int i = 0; i < text.size(); ++i)
+            {
+                tmp += text[i];
+                count++;
+                if (count == 8)
+                {
+                    _cubes.push_back(new Cube{std::move(tmp)});
+                    count = 0;
+                    tmp.clear();
+                }  
+            }
+            if (count > 0)
+            {   
+                _cubes.push_back(new Cube{std::move(tmp)});
+            }
+        }
+}
+
+std::string& Encryption::encrypt(std::string& text)
+{
+    create_cubes(text);
+    int random_num{random_number()};
+    for (int i = 0; i < _cubes.size(); ++i)
+    {
+        rotate_right(*(_cubes[i]), random_num);
+        random_num = random_number();
+        rotate_left(*(_cubes[i]), random_num);
+        random_num = random_number();
+        rotate_up(*(_cubes[i]), random_num);
+        random_num = random_number();
+        rotate_down(*(_cubes[i]), random_num);
+        random_num = random_number();
+        _hash += _cubes[i]->get_cube();
+    }
+    return _hash;
+}
 
 
 void Encryption::rotate_right(Cube& cube, size_t count)
@@ -44,6 +104,7 @@ void Encryption::rotate_left(Cube& cube, size_t count)
         cube[2] = tmp[6];  
     }
 }
+
 void Encryption::rotate_up(Cube& cube, size_t count)
 {
     for (int i = 0; i < count; ++i)
@@ -60,6 +121,7 @@ void Encryption::rotate_up(Cube& cube, size_t count)
         cube[1] = tmp[2];  
     }
 }
+
 void Encryption::rotate_down(Cube& cube, size_t count)
 {
     for (int i = 0; i < count; ++i)
