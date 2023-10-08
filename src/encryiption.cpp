@@ -114,11 +114,10 @@ std::string Encryption::decrypt(std::string key)
             {
                 rotate_left(*(_cubes[i]), rotation_count);
             }
-            std::cout << current << "-";
             --current;  
         }
             _unhash += _cubes[i]->get_cube();
-            current = difference * k;   
+            current = difference * k - 1;   
             k++;
     }
     return _unhash;
