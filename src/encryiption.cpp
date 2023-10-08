@@ -18,10 +18,10 @@ int Encryption::random_number()
     return distribution(gen);
 }
 
- std::string Encryption::get_hash() const
- {
-    return _hash;
- }
+std::string Encryption::get_key() const
+{
+    return _key;
+}
 
 void Encryption::create_cubes(std::string& text)
 {
@@ -55,20 +55,41 @@ std::string& Encryption::encrypt(std::string& text)
 {
     create_cubes(text);
     int random_num{random_number()};
+    _key += ':';
     for (int i = 0; i < _cubes.size(); ++i)
     {
+        std::cout << _cubes.size() << std::endl;
         rotate_right(*(_cubes[i]), random_num);
+        _key += 'R';
+        _key += static_cast<char>(random_num) + '0';
+        _key += ':';
         random_num = random_number();
         rotate_left(*(_cubes[i]), random_num);
+        _key += 'L';
+        _key += static_cast<char>(random_num) + '0';
+        _key += ':';
         random_num = random_number();
         rotate_up(*(_cubes[i]), random_num);
+        _key += 'U';
+        _key += static_cast<char>(random_num) + '0';
+        _key += ':';
         random_num = random_number();
         rotate_down(*(_cubes[i]), random_num);
+        _key += 'D';
+        _key += static_cast<char>(random_num) + '0';
+        _key += ':';
         random_num = random_number();
         _hash += _cubes[i]->get_cube();
     }
     return _hash;
 }
+
+
+
+// std::string& Encryption::decrypt(std::string&)
+// {
+
+// }
 
 
 void Encryption::rotate_right(Cube& cube, size_t count)
