@@ -4,8 +4,16 @@
 #include "encryption.h"
 
 int main() {
-    Encryption enc;
     std::string s = "hello arman mikoyan @ mail . com";
-    std::cout << enc.encrypt(s) << std::endl;
-    std::cout << enc.decrypt(enc.get_key()) << "\n";   
+
+    Encryption enc;
+    
+    std::string encrypted_value =  enc.encrypt(s);
+    std::cout << encrypted_value << std::endl;
+
+    std::string key = enc.get_key();
+    std::cout << key << std::endl;
+
+    std::string decrypted_value =  enc.decrypt(key);
+    std::cout << decrypted_value << "\n";   
 }

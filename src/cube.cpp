@@ -3,7 +3,8 @@
 Cube::Cube(std::string&& cube)
 {
     _cube = cube;
-    if (_cube.size() < 8) {
+    if (_cube.size() < 8) 
+    {
         for (int i = cube.size(); i < 8; ++i)
         {
             _cube += '$';    

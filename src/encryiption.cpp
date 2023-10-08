@@ -62,16 +62,19 @@ std::string& Encryption::encrypt(std::string& text)
         _key += static_cast<char>(random_num) + '0';
         _key += ':';
         random_num = random_number();
+
         rotate_left(*(_cubes[i]), random_num);
         _key += 'L';
         _key += static_cast<char>(random_num) + '0';
         _key += ':';
         random_num = random_number();
+
         rotate_up(*(_cubes[i]), random_num);
         _key += 'U';
         _key += static_cast<char>(random_num) + '0';
         _key += ':';
         random_num = random_number();
+        
         rotate_down(*(_cubes[i]), random_num);
         _key += 'D';
         _key += static_cast<char>(random_num) + '0';
@@ -117,15 +120,9 @@ std::string Encryption::decrypt(std::string key)
         }
         _unhash += _cubes[i]->get_cube();
         current = difference * k - 1;   
-        k++;
-
-        size_t found = _unhash.find('$');
-        while (found != std::string::npos) 
-        {
-            _unhash.erase(found, 1);
-            found = _unhash.find('$', found);
-        }
+        k++;  
     }
+    remove_additional_symbol();
     return _unhash;
 }
 
@@ -195,5 +192,16 @@ void Encryption::rotate_down(Cube& cube, size_t count)
         cube[6] = tmp[2];
         cube[5] = tmp[6];
         cube[1] = tmp[5];  
+    }
+}
+
+
+void Encryption::remove_additional_symbol()
+{
+    size_t found = _unhash.find('$');
+    while (found != std::string::npos) 
+    {
+        _unhash.erase(found, 1);
+        found = _unhash.find('$', found);
     }
 }
