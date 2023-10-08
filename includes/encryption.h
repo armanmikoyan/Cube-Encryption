@@ -23,8 +23,8 @@ private:
     void    rotate_up(Cube&, size_t);
     void  rotate_down(Cube&, size_t);
     void  create_cubes(std::string&);
-    static int       random_number();
     void  remove_additional_symbol();
+    static int       random_number();
 
 public:
    std::vector<Cube*> _cubes;
