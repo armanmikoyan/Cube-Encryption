@@ -55,8 +55,6 @@ std::string& Encryption::encrypt(std::string& text)
 {
     create_cubes(text);
     int random_num{random_number()};
-    _randoms.push_back(random_num);
-    _key += ':';
     for (int i = 0; i < _cubes.size(); ++i)
     {
         rotate_right(*(_cubes[i]), random_num);
@@ -67,23 +65,21 @@ std::string& Encryption::encrypt(std::string& text)
         rotate_left(*(_cubes[i]), random_num);
         _key += 'L';
         _key += static_cast<char>(random_num) + '0';
-        _randoms.push_back(random_num);
         _key += ':';
         random_num = random_number();
         rotate_up(*(_cubes[i]), random_num);
         _key += 'U';
         _key += static_cast<char>(random_num) + '0';
         _key += ':';
-        _randoms.push_back(random_num);
         random_num = random_number();
         rotate_down(*(_cubes[i]), random_num);
         _key += 'D';
         _key += static_cast<char>(random_num) + '0';
         _key += ':';
-        _randoms.push_back(random_num);
         random_num = random_number();
 
         _hash += _cubes[i]->get_cube();
+        std::cout << _key << " " << _key.size() << std::endl;
     }
     return _hash;
 }
@@ -92,33 +88,38 @@ std::string& Encryption::encrypt(std::string& text)
 
 std::string Encryption::decrypt(std::string key)
 {
-    char sym{};
-    int size = key.size();
-    for(int i = 0; i < _cubes.size(); ++i)
-    {   
-        while (size > 0)
+    
+    int current = 11;
+    int difference = 12;
+    int k = 2;
+    for (int i = 0; i < _cubes.size(); ++i)
+    {
+        for(int t = 0; t < 13; ++t)
         {
-            sym = key[size];
-            int rotationCount = key[size + 1] - '0';
+            char sym = key[current];
+            int rotation_count = key[current + 1] - '0';
             if (sym == 'D')
             {
-                rotate_up(*(_cubes[i]), rotationCount);
+                rotate_up(*(_cubes[i]), rotation_count);
             }
             else if (sym == 'U')
             {
-                rotate_down(*(_cubes[i]), rotationCount);
+                rotate_down(*(_cubes[i]), rotation_count);
             }
             else if (sym == 'L')
             {
-                rotate_right(*(_cubes[i]), rotationCount);
+                rotate_right(*(_cubes[i]), rotation_count);
             }
             else if (sym == 'R')
             {
-                rotate_left(*(_cubes[i]), rotationCount);
+                rotate_left(*(_cubes[i]), rotation_count);
             }
-            --size;
+            std::cout << current << "-";
+            --current;  
         }
-        _unhash += _cubes[i]->get_cube();
+            _unhash += _cubes[i]->get_cube();
+            current = difference * k;   
+            k++;
     }
     return _unhash;
 }
