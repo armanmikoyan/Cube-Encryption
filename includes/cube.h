@@ -10,7 +10,7 @@ public:
     char& operator[](size_t);
 
 public:
-    std::string get_cube() const;
+    std::string      get_cube() const;
     void set_cube(const std::string&);
 
 private:

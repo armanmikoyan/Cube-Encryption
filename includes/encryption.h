@@ -14,8 +14,8 @@ public:
 
 public:     
     std::string& encrypt(std::string&);
-    std::string decrypt(std::string);
-    std::string get_key() const;
+    std::string   decrypt(std::string);
+    std::string        get_key() const;
 
 private:
     void rotate_right(Cube&, size_t);
@@ -24,13 +24,13 @@ private:
     void  rotate_down(Cube&, size_t);
     void  create_cubes(std::string&);
     static int       random_number();
-    void remove_additional_symbol();
+    void  remove_additional_symbol();
 
 public:
    std::vector<Cube*> _cubes;
-   std::string _hash;
-   std::string _unhash;
-   std::string _key;
+   std::string         _hash;
+   std::string       _unhash;
+   std::string          _key;
 };
 
 #endif // ENCRYIPTION_H

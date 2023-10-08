@@ -4,7 +4,7 @@
 #include "encryption.h"
 
 int main() {
-    std::string s = "hello arman mikoyan @ mail . com";
+    std::string s = "hello_arman_mikoyan@mail.com";
 
     Encryption enc;
     
